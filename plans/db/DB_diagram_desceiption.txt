@@ -1,0 +1,29 @@
+The diagram found at this link https://www.draw.io/#G11ReQLOdqB85x9H07MixR_h_cTTAKsURN is a relational representation of the database that will be used for this project.
+TABLES:
+Destination - Stores the different places trips will be stored for.
+	-Id - Primary key, integer
+	-Name - Name of the destination, string
+	-Region - Name of region or range this trip is located, string
+	-EvGain - Amount of elevation gain required in metres, integer
+	-Distance - Length of this trail in kilometres, float
+	-Coords - Geographic coordinates of this trips starting point, string
+	-EndCoords - Geographic coordinates of this trips ending point, string
+User - Stores info on all users of the system.
+	-Id - Primary key, integer
+	-Name - First and last name of user, separated by a space, string
+	-Email - Email address of user, string
+	-Username - Unique identifier for user, string
+	-Password - Encrypted password for user, string
+	-Type - Access privilege of user, either owner, admin or regular, (1,2,3), integer
+Comments - Stores comments, questions or reports by a user on a certain trip
+	-Id - Primary key, integer
+	-DestId - Foreign key to Destination table
+	-UserId - Foreign key to User table
+	-Time - UNIX time of the comment, long
+	-Text - The contents of the comment, string (LIMIT?)
+Trip Report - Stores info in trip reports specifically, extends comment
+	-CommentId - Foreign key to Comment table
+	-Date - Date of the trip, string
+	-Result - Indicates whether the trip was successful or not, boolean
+
+	
