@@ -1,0 +1,11 @@
+There are three different types of users that will be able to use the site.
+
+Owners - Users who run the website, and can add or remove any content from it including users, comments
+and destinations
+Admins - Users who curate the content for a certain physical region, they can add new destinations or 
+delete comments for destinations in their region.
+Regular - These user can comment and add trip reports as well as add new destinations which are 'probationary'
+until an admin or owner approves them. Regular users can apply to become admins, and will have to be approved
+by at least three admins.
+
+Access levels are hierarchical, i.e. owners can do what admins can, but not vice versa. 
