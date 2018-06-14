@@ -8,6 +8,9 @@ Destination - Stores the different places trips will be stored for.
 	-Distance - Length of this trail in kilometres, float
 	-Coords - Geographic coordinates of this trips starting point, string
 	-EndCoords - Geographic coordinates of this trips ending point, string
+	-PDiff - Rates from 1-5 the physical difficulty of the route, integer
+	-TDiff - Rates from 1-5 the technical difficulty of the route, integer
+	-PeakEv - Highest point, in metres above sea level on the trail
 User - Stores info on all users of the system.
 	-Id - Primary key, integer
 	-Name - First and last name of user, separated by a space, string
@@ -26,4 +29,5 @@ Trip Report - Stores info in trip reports specifically, extends comment
 	-Date - Date of the trip, string
 	-Result - Indicates whether the trip was successful or not, boolean
 
-	
+Diagram Changelog:
+June 13 2018 - Added PeakEv, PDiff and TDiff to Destination table	
