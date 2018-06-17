@@ -26,8 +26,12 @@ Comments - Stores comments, questions or reports by a user on a certain trip
 	-Text - The contents of the comment, string (LIMIT?)
 Trip Report - Stores info in trip reports specifically, extends comment
 	-CommentId - Foreign key to Comment table
-	-Date - Date of the trip, string
-	-Result - Indicates whether the trip was successful or not, boolean
+	-Result - Indicates whether the trip was successful or not (1:success, 0:failure), integer
+Admins - Stores the region the admin has access to moderate, each admin only moderates one region
+	   - Note that it is not necessary to have owners in this table as they can moderate any region 	
+	-UserId - Foreign key to User table
+	-Region - The region the admin can moderate
 
 Diagram Changelog:
-June 13 2018 - Added PeakEv, PDiff and TDiff to Destination table	
+June 13 2018 - Added PeakEv, PDiff and TDiff to Destination table
+June 16 2018 - Added Admins table, took date out of trip report as it can be rebuilt from UNIX time in comment
