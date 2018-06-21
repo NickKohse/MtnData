@@ -1,0 +1,3 @@
+future versions:
+-add salt and hashing to user passwords
+-allow uploading of pictures

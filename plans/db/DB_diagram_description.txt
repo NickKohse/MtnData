@@ -17,7 +17,7 @@ User - Stores info on all users of the system.
 	-Email - Email address of user, string
 	-Username - Unique identifier for user, string
 	-Password - Encrypted password for user, string
-	-Type - Access privilege of user, either owner, admin or regular, (1,2,3), integer
+	-Type - Access privilege of user, either owner, admin or regular, (0, 1, 2), integer
 Comments - Stores comments, questions or reports by a user on a certain trip
 	-Id - Primary key, integer
 	-DestId - Foreign key to Destination table
