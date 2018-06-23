@@ -1,0 +1,7 @@
+have:
+-password must be > 8 characters, have an uppercase, lowercase and symbol in it
+planned:
+-hahs password to store in db
+-append a salt to the password
+-use email for recovery
+-add security questions

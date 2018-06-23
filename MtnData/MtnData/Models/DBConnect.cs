@@ -8,7 +8,7 @@ namespace MtnData.Models
 {
     public abstract class DBConnect
     {        
-        protected string dbConnectString = "Data Source = C:\\Users\\Nick-Desktop\\Documents\\MtnData\\mtn.sqlite3; Version=3;";
+        protected string dbConnectString = @"Data Source = " + Globals.baseProgramDir + "mtn.sqlite3; Version=3;";
         protected SQLiteConnection conn;       
     }
 }
