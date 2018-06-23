@@ -18,4 +18,13 @@ namespace MtnData.Models
             text = t;
         }
     }
+
+    public class LoginMessage : Message
+    {
+        private User user;
+        public LoginMessage(bool r, string t, User u) : base(r, t)
+        {
+            user = u;
+        }
+    }
 }

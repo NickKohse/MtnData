@@ -7,7 +7,7 @@ namespace MtnData.Models
 {
     public class Globals
     {
-        public enum USER_TYPES { Owner, Admin, Regular };
+        public enum USER_TYPES { Owner, Admin, Regular };        
         public const string baseProgramDir = @"C:\Users\Nick-Desktop\Documents\MtnData\";
 
 
