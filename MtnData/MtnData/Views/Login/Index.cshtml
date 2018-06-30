@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Get,
+                new { id = "loginForm" }))
+{
+    <h3>Username</h3>
+    @Html.TextBox("username")
+    <br />
+    <h3>Password</h3>
+    @Html.Password("password")
+    <br />
+    <p style="color:red">@ViewBag.serverResponse</p>
+    
+    <br />
+    <input type="submit" value="Log In" />
+    <br />
+
+}

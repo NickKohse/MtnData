@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MtnData.Models
+namespace MtnData.Models.Messages
 {
     /// <summary>
     /// A class to pass messages inbetween models and controllers
@@ -17,6 +17,9 @@ namespace MtnData.Models
             result = r;
             text = t;
         }
+
+        public bool GetResult(){ return result; }
+        public string GetText(){ return text; }
     }
 
     public class LoginMessage : Message
@@ -26,5 +29,7 @@ namespace MtnData.Models
         {
             user = u;
         }
+
+        public User GetUser() { return user; }
     }
 }

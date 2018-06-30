@@ -25,7 +25,7 @@ namespace MtnData.Models
         public static void ExceptionLogger(string messageToLog)
         {
             //**********handle exceptions            
-            System.IO.File.AppendAllText(Globals.baseProgramDir + "server_error_log.txt", DateTime.Now.ToString() + " : " +  messageToLog);
+            System.IO.File.AppendAllText(Globals.baseProgramDir + "server_error_log.txt", DateTime.Now.ToString() + ": " +  messageToLog + "\n");
         }
             
     }

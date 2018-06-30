@@ -1,0 +1,3 @@
+6/30/2018 4:28:21 PM : An exception has occured in the Login function. Exception message:No connection associated with this command
+6/30/2018 4:30:23 PM: An exception has occured in the Login function. Exception message:SQLite error
+no such table: Users

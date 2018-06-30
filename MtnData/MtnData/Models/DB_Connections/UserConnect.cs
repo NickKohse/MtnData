@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
 using System.Web;
+using MtnData.Models.Messages;
 
 
 namespace MtnData.Models
 {
     public class UserConnect : DBConnect
     {
-        UserConnect()
+        public UserConnect()
         {
             conn = new SQLiteConnection(dbConnectString);
         }
@@ -106,17 +107,20 @@ namespace MtnData.Models
         /// <returns>a message with a bool indicating success and a string mesage</returns>
         public LoginMessage Login(string username, string pass)
         {
-            SQLiteCommand login = new SQLiteCommand("SELECT Name, Username, Email, Type FROM Users WHERE Username=@user AND Password=@pass");
-            login.Parameters.AddWithValue("@user", username);
-            login.Parameters.AddWithValue("@pass", pass);
+            string SqlString = @"SELECT Name, Username, Email, Type FROM User WHERE Username= @user AND Password= @pass";
+            SQLiteCommand login = new SQLiteCommand(SqlString, conn);
+            
+            login.Parameters.Add(new SQLiteParameter("@user", username));
+            login.Parameters.Add(new SQLiteParameter("@pass", pass));
             User toReturn = null;
 
             try
             {
+                conn.Open();
                 SQLiteDataReader res = login.ExecuteReader();
                 if (!res.HasRows)
                 {
-                    return new LoginMessage(false, "Credentials wrong", null);
+                    return new LoginMessage(false, "Username or Password Incorrect", null);
                 }
                 else //not checking for the case of more than one row returned as its logically impossible
                 {
@@ -127,8 +131,9 @@ namespace MtnData.Models
             }
             catch(Exception ex)
             {
-                Utilities.ExceptionLogger("An exception has occured in the Login function. Exception message:" + ex.Message);
-                return new LoginMessage(false, "An unexpected exception has occured", null);
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                Utilities.ExceptionLogger("An exception has occurred in the Login function. Exception message:" + ex.Message);
+                return new LoginMessage(false, "An unexpected exception has occurred", null);
             }
             return new LoginMessage(true, "Login succeded", toReturn);
         }
