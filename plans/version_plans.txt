@@ -1,3 +1,7 @@
 future versions:
 -add salt and hashing to user passwords
 -allow uploading of pictures
+-add statistics portion to each location showing:
+  -Total successes and failures (success rate)
+  -How many of last five attempts were sucessful
+  -When the last sucessful attempt was
