@@ -37,19 +37,22 @@ namespace MtnData.Models
             {
                 return new Message(false, "Password too weak");
             }
-            SQLiteCommand addUserSQL = new SQLiteCommand("INSERT INTO User (Name, Email, Username, Password, Type) VALUES (?,?,?,?,?)", conn);
-            addUserSQL.Parameters.Add(name);
-            addUserSQL.Parameters.Add(email);
-            addUserSQL.Parameters.Add(username);
-            addUserSQL.Parameters.Add(password);
-            addUserSQL.Parameters.Add(Globals.USER_TYPES.Regular); //any user made in this fashion must be a regular user
+            string sqlString = @"INSERT INTO User (Name, Email, Username, Password, Type) VALUES (@name,@email,@username,@password,@type)";
+            SQLiteCommand addUserSQL = new SQLiteCommand(sqlString , conn);
+            addUserSQL.Parameters.Add(new SQLiteParameter("@name", name));
+            addUserSQL.Parameters.Add(new SQLiteParameter("@email", email));
+            addUserSQL.Parameters.Add(new SQLiteParameter("@username", username));
+            addUserSQL.Parameters.Add(new SQLiteParameter("@password", password));
+            addUserSQL.Parameters.Add(new SQLiteParameter("@type", Globals.USER_TYPES.Regular)); //any user made in this fashion must be a regular user
             try 
             {
+                conn.Open();
                 int rows = addUserSQL.ExecuteNonQuery();
                 if(rows != 1)
                 {
                     throw new Exception(rows + "rows were affected by inserting a user instead of the expected 1");
                 }
+                conn.Close();
             }
             catch (Exception ex)
             {
@@ -148,9 +151,10 @@ namespace MtnData.Models
         /// <returns> true if it is unique</returns>
         private bool UniqueInCol(string col, Object entry)
         {
-            SQLiteCommand findSame = new SQLiteCommand("SELECT * FROM User WHERE @col=@val", conn);
-            findSame.Parameters.AddWithValue("@col", col);
-            findSame.Parameters.AddWithValue("@val", entry);
+            SQLiteCommand findSame = new SQLiteCommand(@"SELECT * FROM User WHERE @col=@val", conn);
+            findSame.Parameters.Add(new SQLiteParameter("@col", col));
+            findSame.Parameters.Add(new SQLiteParameter("@val", entry));
+            conn.Open();
             SQLiteDataReader res = findSame.ExecuteReader();
             //*********handle exception by throwing
             if (res.HasRows)

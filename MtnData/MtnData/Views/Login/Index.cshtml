@@ -15,9 +15,12 @@
     @Html.Password("password")
     <br />
     <p style="color:red">@ViewBag.serverResponse</p>
-    
+
     <br />
     <input type="submit" value="Log In" />
     <br />
 
 }
+
+<br />
+@Html.ActionLink("Create New Account", "NewAccount", "Login")

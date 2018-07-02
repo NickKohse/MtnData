@@ -1,2 +1,2 @@
 TODO list:
--Finish UserConnect::AddUser() 
+-Finish login/created view

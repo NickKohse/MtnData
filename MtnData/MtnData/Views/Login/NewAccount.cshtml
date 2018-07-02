@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Create Account";
+}
+
+<h2>NewAccount</h2>
+
+@using (Html.BeginForm("NewAcct", "Login", FormMethod.Get,
+                            new { id = "createForm" }))
+{
+
+    <br />
+    <h3>Username</h3>
+    <input type="text" size="20" name="username" />
+    <br />
+    <h3>Password</h3>
+    <input type="password" size="20" name="password" />
+    <br />
+    <h3>Confirm Password</h3>
+    <input type="password" size="20" name="passwordConfirm" />
+    <br />
+    <h3>Name</h3>
+    <input type="text" size="20" name="name" />
+    <br />
+    <h3>Email</h3>
+    <input type="email" size="20" name="email" />
+    <br />
+    <p style="color:red;">@ViewBag.messageFromController</p>
+    <br />
+    <input type="submit" value="Create" />
+    <br />
+}
+

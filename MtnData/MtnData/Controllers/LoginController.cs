@@ -32,5 +32,34 @@ namespace MtnData.Controllers
                 return View("Index");
             }
         }
+
+        public ActionResult NewAccount()
+        {
+            return View();
+        }
+
+        public ActionResult NewAcct(string username, string password, string passwordConfirm, string email, string name)
+        {
+            if (password != passwordConfirm)
+            {
+                ViewBag.createResponse = "Passwords must match";
+                return View("NewAccount");
+            }
+            UserConnect userConnect = new UserConnect();
+
+            Message message = userConnect.AddUser(name, username, password, email);
+
+            if (message.GetResult())
+            {
+                return View("Created");
+            }
+            else
+            {
+                ViewBag.createResponse = message.GetText();
+                return View("NewAccount");
+            }
+
+            
+        }
     }
 }
