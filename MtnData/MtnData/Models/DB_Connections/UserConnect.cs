@@ -128,6 +128,8 @@ namespace MtnData.Models
                     res.GetValues(oarr);
                     toReturn = new User(oarr[0].ToString(), oarr[1].ToString(), oarr[2].ToString(), Int32.Parse(oarr[3].ToString()));
                 }
+                res.Close();
+                conn.Close();
             }
             catch(Exception ex)
             {
