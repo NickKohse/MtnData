@@ -1,3 +1,9 @@
 6/30/2018 4:28:21 PM : An exception has occured in the Login function. Exception message:No connection associated with this command
 6/30/2018 4:30:23 PM: An exception has occured in the Login function. Exception message:SQLite error
 no such table: Users
+7/2/2018 5:24:08 PM: An exception has occured in the AddUser function. Exception message:Abort due to constraint violation
+column Username is not unique
+7/2/2018 5:28:00 PM: An exception has occured in the AddUser function. Exception message:Abort due to constraint violation
+column Username is not unique
+7/2/2018 5:36:20 PM: An exception has occured in the AddUser function. Exception message:Abort due to constraint violation
+column Username is not unique

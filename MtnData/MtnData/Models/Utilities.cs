@@ -14,7 +14,7 @@ namespace MtnData.Models
         /// <returns>True for a good password, false if it's too weak</returns>
         public static Boolean GoodPassword(String pass)
         {
-            if(pass.Length < 8 || !pass.Any(char.IsUpper) || !pass.Any(char.IsLower) || !pass.Any(char.IsSymbol))
+            if(pass.Length < 8 || !pass.Any(char.IsUpper) || !pass.Any(char.IsLower) || !pass.Any(char.IsDigit))
             {
                 return false;
             }

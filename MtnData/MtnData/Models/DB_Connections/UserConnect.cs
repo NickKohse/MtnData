@@ -25,11 +25,11 @@ namespace MtnData.Models
         /// <returns>True if user is sucessfuly added, false otherwise</returns>
         public Message AddUser(string name, string username, string password, string email)
         {
-            if (!UniqueInCol("Email", email))
+            if (!UniqueInEmail(email))
             {
                 return new Message(false, "Email is being used by another user");
             }
-            if (!UniqueInCol("Username", username))
+            if (!UniqueInUsername(username))
             {
                 return new Message(false, "Username is being used by another user");
             }
@@ -144,23 +144,45 @@ namespace MtnData.Models
         }
 
         /// <summary>
-        /// A utility function for this class that chekcs if a value is unique within the column it would be inserted into
+        /// These two function are pretty much the same because sqlite didn't like having the name of a column as a parameter
+        /// *********see if you can fix that
         /// </summary>
         /// <param name="col"> column to check</param>
         /// <param name="entry"> value to check</param>
         /// <returns> true if it is unique</returns>
-        private bool UniqueInCol(string col, Object entry)
+        private bool UniqueInUsername(string username)
         {
-            SQLiteCommand findSame = new SQLiteCommand(@"SELECT * FROM User WHERE @col=@val", conn);
-            findSame.Parameters.Add(new SQLiteParameter("@col", col));
-            findSame.Parameters.Add(new SQLiteParameter("@val", entry));
+            string SqlString = @"SELECT * FROM User WHERE Username= @val";
+            SQLiteCommand findSame = new SQLiteCommand(SqlString, conn);
+            findSame.Parameters.Add(new SQLiteParameter("@val", username));
             conn.Open();
-            SQLiteDataReader res = findSame.ExecuteReader();
+            SQLiteDataReader res = findSame.ExecuteReader();  
+            
             //*********handle exception by throwing
             if (res.HasRows)
             {
+                conn.Close();
                 return false;
             }
+            conn.Close();
+            return true;
+        }
+
+        private bool UniqueInEmail(string email)
+        {
+            string SqlString = @"SELECT * FROM User WHERE Email= @val";
+            SQLiteCommand findSame = new SQLiteCommand(SqlString, conn);
+            findSame.Parameters.Add(new SQLiteParameter("@val", email));
+            conn.Open();
+            SQLiteDataReader res = findSame.ExecuteReader();
+
+            //*********handle exception by throwing
+            if (res.HasRows)
+            {
+                conn.Close();
+                return false;
+            }
+            conn.Close();
             return true;
         }
     }
