@@ -10,7 +10,8 @@ Destination - Stores the different places trips will be stored for.
 	-EndCoords - Geographic coordinates of this trips ending point, string
 	-PDiff - Rates from 1-5 the physical difficulty of the route, integer
 	-TDiff - Rates from 1-5 the technical difficulty of the route, integer
-	-PeakEv - Highest point, in metres above sea level on the trail
+	-PeakEv - Elevation at end point or peak elevation on a circuit, in metres above sea level on the trail
+	-Verified - Is this a verified by admin route, bool
 User - Stores info on all users of the system.
 	-Id - Primary key, integer
 	-Name - First and last name of user, separated by a space, string
