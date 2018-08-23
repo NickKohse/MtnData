@@ -1,3 +1,6 @@
 TODO list:
 -Finish login/created view
 -Change login to the username of the logged in user in the navbar on login
+-deal with possible nulls for inserting location
+-fix repetition in add/update sql functions
+-recover from deleting multiple rows in delete location function

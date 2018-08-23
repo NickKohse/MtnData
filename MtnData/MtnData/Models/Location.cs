@@ -7,16 +7,16 @@ namespace MtnData.Models
 {
     public class Location
     {
-        private string Name { get; set; }
-        private string Region { get; set; }
-        private int EvGain { get; set; }
-        private float Distance { get; set; }
-        private Coordinate Start { get; set; }
-        private Coordinate End { get; set; }
-        private int PDiff { get; set; }
-        private int TDiff { get; set; }
-        private int FinalEv { get; set; }
-        private bool Verified { get; set; }
+        public string Name { get; private set; }
+        public string Region { get; private set; }
+        public int EvGain { get; private set; }
+        public float Distance { get; private set; }
+        public Coordinate Start { get; private set; }
+        public Coordinate End { get; private set; }
+        public int PDiff { get; private set; }
+        public int TDiff { get; private set; }
+        public int FinalEv { get; private set; }
+        public bool Verified { get; private set; }
 
         public Location(string name, string region, int evGain, float distance, Coordinate start, Coordinate end, int pDiff, int tDiff, int finalEv, bool verified)
         {
