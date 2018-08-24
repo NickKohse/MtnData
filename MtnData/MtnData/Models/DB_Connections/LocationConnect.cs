@@ -33,7 +33,9 @@ namespace MtnData.Models.DB_Connections
             addLocSQL.Parameters.Add(new SQLiteParameter("@tdiff", toAdd.TDiff));
             addLocSQL.Parameters.Add(new SQLiteParameter("@peakev", toAdd.FinalEv));
             addLocSQL.Parameters.Add(new SQLiteParameter("@verified", toAdd.Verified));
+            return ExecuteUpdate(addLocSQL, "AddLocation");
 
+            /*
             try
             {
                 conn.Open();
@@ -51,6 +53,7 @@ namespace MtnData.Models.DB_Connections
             }
 
             return new Message(true, "Sucessfully added a location");
+            */
 
         }
 
@@ -75,7 +78,8 @@ namespace MtnData.Models.DB_Connections
             updateLocSQL.Parameters.Add(new SQLiteParameter("@peakev", toUpdate.FinalEv));
             updateLocSQL.Parameters.Add(new SQLiteParameter("@verified", toUpdate.Verified));
             updateLocSQL.Parameters.Add(new SQLiteParameter("@id", id));
-
+            return ExecuteUpdate(updateLocSQL, "ModifyLocation");
+            /*
             try
             {
                 conn.Open();
@@ -93,11 +97,12 @@ namespace MtnData.Models.DB_Connections
             }
 
             return new Message(true, "Sucessfully modified a location");
+            */
 
         }
 
         /// <summary>
-        /// Deleets a location from the database
+        /// Deletes a location from the database
         /// </summary>
         /// <param name="id">the id of the location to be deleted</param>
         /// <returns>a status message</returns>
@@ -106,8 +111,9 @@ namespace MtnData.Models.DB_Connections
             string sqlString = @"DELETE FROM Destination WHERE Id=@id";
             SQLiteCommand deleteLocSQL = new SQLiteCommand(sqlString, conn);
             deleteLocSQL.Parameters.Add(new SQLiteParameter("@id", id));
+            return ExecuteUpdate(deleteLocSQL, "RemoveLocation");
 
-
+            /*
             try
             {
                 conn.Open();
@@ -125,6 +131,7 @@ namespace MtnData.Models.DB_Connections
             }
 
             return new Message(true, "Sucessfully deleted a location");
+            */
         }
     }
 }

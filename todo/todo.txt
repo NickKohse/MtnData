@@ -2,5 +2,6 @@ TODO list:
 -Finish login/created view
 -Change login to the username of the logged in user in the navbar on login
 -deal with possible nulls for inserting location
--fix repetition in add/update sql functions
+-fix repetition in add/update sql functions(fixed?)
 -recover from deleting multiple rows in delete location function
+-change modify attribute function to be more like modify location function, with extra complication of non changable attributes for user

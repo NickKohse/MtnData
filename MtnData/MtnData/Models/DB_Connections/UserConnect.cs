@@ -44,6 +44,10 @@ namespace MtnData.Models
             addUserSQL.Parameters.Add(new SQLiteParameter("@username", username));
             addUserSQL.Parameters.Add(new SQLiteParameter("@password", password));
             addUserSQL.Parameters.Add(new SQLiteParameter("@type", Globals.USER_TYPES.Regular)); //any user made in this fashion must be a regular user
+
+            return ExecuteUpdate(addUserSQL, "AddUser");
+
+            /*
             try 
             {
                 conn.Open();
@@ -61,6 +65,7 @@ namespace MtnData.Models
 
             }
             return new Message(true, "Sucessfully added user");
+            */
         }
 
         /// <summary>
@@ -100,6 +105,14 @@ namespace MtnData.Models
                 return new Message(false, "An unexpected exception has occured");
             }
             return new Message(true, "Password has been changed");
+        }
+
+        public Message RemoveUser(int id)
+        {
+            string sqlString = @"DELETE FROM Users WHERE Id=@id";
+            SQLiteCommand deleteLocSQL = new SQLiteCommand(sqlString, conn);
+            deleteLocSQL.Parameters.Add(new SQLiteParameter("@id", id));
+            return ExecuteUpdate(deleteLocSQL, "RemoveUser");
         }
 
         /// <summary>
