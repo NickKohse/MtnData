@@ -5,3 +5,4 @@ future versions:
   -Total successes and failures (success rate)
   -How many of last five attempts were sucessful
   -When the last sucessful attempt was
+-add support for imperial units

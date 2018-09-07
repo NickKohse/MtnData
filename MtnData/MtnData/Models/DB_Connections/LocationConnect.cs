@@ -22,10 +22,11 @@ namespace MtnData.Models.DB_Connections
         /// <returns>A message show the result of the attempted insertion</returns>
         public Message AddLocation(Location toAdd)
         {
-            string sqlString = @"INSERT INTO Destination (Name, Region, Distance, Coords, EndCoords, PDiff, TDiff, PeakEv, Verified) VALUES (@name,@region,@distance,@coords,@endcoords,@pdiff,@tdiff,@peakev,@verified)";
+            string sqlString = @"INSERT INTO Destination (Name, Region, EvGain, Distance, Coords, EndCoords, PDiff, TDiff, PeakEv, Verified) VALUES (@name,@region,@evgain,@distance,@coords,@endcoords,@pdiff,@tdiff,@peakev,@verified)";
             SQLiteCommand addLocSQL = new SQLiteCommand(sqlString, conn);
             addLocSQL.Parameters.Add(new SQLiteParameter("@name", toAdd.Name));
             addLocSQL.Parameters.Add(new SQLiteParameter("@region", toAdd.Region));
+            addLocSQL.Parameters.Add(new SQLiteParameter("@evgain", toAdd.EvGain));
             addLocSQL.Parameters.Add(new SQLiteParameter("@distance", toAdd.Distance));
             addLocSQL.Parameters.Add(new SQLiteParameter("@coords", toAdd.Start));
             addLocSQL.Parameters.Add(new SQLiteParameter("@endcoords", toAdd.End));
@@ -65,11 +66,12 @@ namespace MtnData.Models.DB_Connections
         /// <returns>A status message</returns>
         public Message ModifyLocation(int id, Location toUpdate)
         {
-            string sqlString = @"UPDATE Destination SET Name=@name , Region=@region , Distance=@distance , Coords=@coords , EndCoords=@endcoords , PDiff=@pdiff , TDiff=@tdiff , PeakEv=@peakev 
+            string sqlString = @"UPDATE Destination SET Name=@name , Region=@region , EvGain=@evgain Distance=@distance , Coords=@coords , EndCoords=@endcoords , PDiff=@pdiff , TDiff=@tdiff , PeakEv=@peakev 
                                   , Verified=@verified WHERE Id=@id";
             SQLiteCommand updateLocSQL = new SQLiteCommand(sqlString, conn);
             updateLocSQL.Parameters.Add(new SQLiteParameter("@name", toUpdate.Name));
             updateLocSQL.Parameters.Add(new SQLiteParameter("@region", toUpdate.Region));
+            updateLocSQL.Parameters.Add(new SQLiteParameter("@evgain", toUpdate.EvGain));
             updateLocSQL.Parameters.Add(new SQLiteParameter("@distance", toUpdate.Distance));
             updateLocSQL.Parameters.Add(new SQLiteParameter("@coords", toUpdate.Start));
             updateLocSQL.Parameters.Add(new SQLiteParameter("@endcoords", toUpdate.End));

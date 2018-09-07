@@ -5,3 +5,39 @@
 
 <h2>NewLocation</h2>
 
+@using (Html.BeginForm("NewLoc", "Location", FormMethod.Get,
+                            new { id = "createForm" }))
+{
+    <br />
+    <h3>Name</h3>
+    <input type="text" size="20" name="name" />
+    <br />
+    <h3>Region</h3>
+    <input type="text" size="20" name="region" />
+    <br />
+    <h3>Elevation Gain(m)</h3>
+    <input type="number" size="20" name="evGain" />
+    <br />
+    <h3>Distance(km)</h3>
+    <input type="number" size="20" name="distance" />
+    <br />
+    <h3>Start Coordinates</h3>
+    <input type="text" size="20" name="start" />
+    <br />
+    <h3>End Coordinates</h3>
+    <input type="text" size="20" name="end" />
+    <br />
+    <h3>Physical Difficulty</h3>
+    <input type="number" size="20" name="pDiff" />
+    <br />
+    <h3>Technical Difficulty</h3>
+    <input type="number" size="20" name="tDiff" />
+    <br />
+    <h3>Peak Elevation(m)</h3>
+    <input type="number" size="20" name="peakEv" />
+    <br />
+    <p style="color:red;">@ViewBag.createLocationResponse</p>
+    <br />
+    <input type="submit" value="Create" />
+    <br />
+}

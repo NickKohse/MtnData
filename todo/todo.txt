@@ -5,3 +5,4 @@ TODO list:
 -fix repetition in add/update sql functions(fixed?)
 -recover from deleting multiple rows in delete location function
 -change modify attribute function to be more like modify location function, with extra complication of non changable attributes for user
+-think of better names for login and location actions
