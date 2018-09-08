@@ -27,6 +27,20 @@ namespace MtnData.Models
             //**********handle exceptions            
             System.IO.File.AppendAllText(Globals.baseProgramDir + "server_error_log.txt", DateTime.Now.ToString() + ": " +  messageToLog + "\n");
         }
+        private static IReadOnlyDictionary<Globals.LOG_LEVELS, string> logLevels = new Dictionary<Globals.LOG_LEVELS, string>()
+        {
+            {Globals.LOG_LEVELS.Info, "INFO: "},
+            {Globals.LOG_LEVELS.Audit, "AUDIT: "},
+            {Globals.LOG_LEVELS.Error, "ERROR: "},
+            {Globals.LOG_LEVELS.Critical, "CRITICAL: "}
+
+        };
+        public static void EventLogger(string messageToLog, Globals.LOG_LEVELS level)
+        {
+            string result;
+            logLevels.TryGetValue(level, out result);
+            System.IO.File.AppendAllText(Globals.baseProgramDir + "server_event_log.txt", DateTime.Now.ToString() + ": " + result + messageToLog + "\n");
+        }
             
     }
 }

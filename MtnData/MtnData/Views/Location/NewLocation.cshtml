@@ -22,10 +22,18 @@
     <input type="number" size="20" name="distance" />
     <br />
     <h3>Start Coordinates</h3>
-    <input type="text" size="20" name="start" />
+    <label for="startN">NS[-90,90]:</label>
+    <input type="number" size="10" name="startN" />
+    <br />
+    <label for="startW">EW[-180,180]:</label>
+    <input type="number" size="10" name="startW" />
     <br />
     <h3>End Coordinates</h3>
-    <input type="text" size="20" name="end" />
+    <label for="endN">NW[-90,90]:</label>
+    <input type="number" size="20" name="endN" />
+    <br />
+    <label for="endW">EW[-180,180]:</label>
+    <input type="number" size="10" name="endW" />
     <br />
     <h3>Physical Difficulty</h3>
     <input type="number" size="20" name="pDiff" />
@@ -37,11 +45,11 @@
     <input type="number" size="20" name="peakEv" />
     <br />
     <h3>Verified</h3>
-    <input type="checkbox" name="verified" disabled/>
+    <input type="checkbox" name="verified" disabled />
     <label for="verified">Admin Verified</label>
-    <br  />
+    <br />
     <h3>Description</h3>
-    <input type="text" size="20" name="description"/>
+    <input type="text" size="20" name="description" />
     <br />
     <p style="color:red;">@ViewBag.createLocationResponse</p>
     <br />

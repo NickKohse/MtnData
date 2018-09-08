@@ -19,7 +19,7 @@ namespace MtnData.Models
         public bool Verified { get; private set; }
         public string Description { get; private set; }
 
-        public Location(string name, string region, int evGain, float distance, Coordinate start, Coordinate end, int pDiff, int tDiff, int finalEv, bool verified)
+        public Location(string name, string region, int evGain, float distance, Coordinate start, Coordinate end, int pDiff, int tDiff, int finalEv, bool verified, string description)
         {
             if (pDiff < 1 || pDiff > 5)
             {
@@ -34,12 +34,13 @@ namespace MtnData.Models
             Region = region;
             EvGain = evGain;
             Distance = distance;
-            start = Start;
-            end = End;
-            tDiff = TDiff;
-            pDiff = PDiff;
-            finalEv = FinalEv;
-            verified = Verified;
+            Start = start;
+            End = end;
+            TDiff = tDiff;
+            PDiff = pDiff;
+            FinalEv = finalEv;
+            Verified = verified;
+            Description = description;
         }
     }
 

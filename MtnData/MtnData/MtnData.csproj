@@ -204,6 +204,7 @@
     <Content Include="Views\Login\Created.cshtml" />
     <Content Include="Views\Location\NewLocation.cshtml" />
     <Content Include="Views\Location\Index.cshtml" />
+    <Content Include="Views\Location\Created.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
