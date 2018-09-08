@@ -19,7 +19,7 @@ namespace MtnData.Controllers
             return View();
         }
 
-        public ActionResult NewLoc()
+        public ActionResult NewLoc(string name, string region, string evGain, string distance, string start, string end, string pDiff, string TDiff, string peakEv, string verified, string description)
         {
             return View("Index");
         }

@@ -17,6 +17,7 @@ namespace MtnData.Models
         public int TDiff { get; private set; }
         public int FinalEv { get; private set; }
         public bool Verified { get; private set; }
+        public string Description { get; private set; }
 
         public Location(string name, string region, int evGain, float distance, Coordinate start, Coordinate end, int pDiff, int tDiff, int finalEv, bool verified)
         {

@@ -22,7 +22,7 @@ namespace MtnData.Models.DB_Connections
         /// <returns>A message show the result of the attempted insertion</returns>
         public Message AddLocation(Location toAdd)
         {
-            string sqlString = @"INSERT INTO Destination (Name, Region, EvGain, Distance, Coords, EndCoords, PDiff, TDiff, PeakEv, Verified) VALUES (@name,@region,@evgain,@distance,@coords,@endcoords,@pdiff,@tdiff,@peakev,@verified)";
+            string sqlString = @"INSERT INTO Destination (Name, Region, EvGain, Distance, Coords, EndCoords, PDiff, TDiff, PeakEv, Verified, Description) VALUES (@name,@region,@evgain,@distance,@coords,@endcoords,@pdiff,@tdiff,@peakev,@verified,@description)";
             SQLiteCommand addLocSQL = new SQLiteCommand(sqlString, conn);
             addLocSQL.Parameters.Add(new SQLiteParameter("@name", toAdd.Name));
             addLocSQL.Parameters.Add(new SQLiteParameter("@region", toAdd.Region));
@@ -34,6 +34,7 @@ namespace MtnData.Models.DB_Connections
             addLocSQL.Parameters.Add(new SQLiteParameter("@tdiff", toAdd.TDiff));
             addLocSQL.Parameters.Add(new SQLiteParameter("@peakev", toAdd.FinalEv));
             addLocSQL.Parameters.Add(new SQLiteParameter("@verified", toAdd.Verified));
+            addLocSQL.Parameters.Add(new SQLiteParameter("@description", toAdd.Description));
             return ExecuteUpdate(addLocSQL, "AddLocation");
 
             /*
@@ -66,8 +67,8 @@ namespace MtnData.Models.DB_Connections
         /// <returns>A status message</returns>
         public Message ModifyLocation(int id, Location toUpdate)
         {
-            string sqlString = @"UPDATE Destination SET Name=@name , Region=@region , EvGain=@evgain Distance=@distance , Coords=@coords , EndCoords=@endcoords , PDiff=@pdiff , TDiff=@tdiff , PeakEv=@peakev 
-                                  , Verified=@verified WHERE Id=@id";
+            string sqlString = @"UPDATE Destination SET Name=@name , Region=@region , EvGain=@evgain , Distance=@distance , Coords=@coords , EndCoords=@endcoords , PDiff=@pdiff , TDiff=@tdiff , PeakEv=@peakev 
+                                  , Verified=@verified , Description=@description WHERE Id=@id";
             SQLiteCommand updateLocSQL = new SQLiteCommand(sqlString, conn);
             updateLocSQL.Parameters.Add(new SQLiteParameter("@name", toUpdate.Name));
             updateLocSQL.Parameters.Add(new SQLiteParameter("@region", toUpdate.Region));
@@ -79,6 +80,7 @@ namespace MtnData.Models.DB_Connections
             updateLocSQL.Parameters.Add(new SQLiteParameter("@tdiff", toUpdate.TDiff));
             updateLocSQL.Parameters.Add(new SQLiteParameter("@peakev", toUpdate.FinalEv));
             updateLocSQL.Parameters.Add(new SQLiteParameter("@verified", toUpdate.Verified));
+            updateLocSQL.Parameters.Add(new SQLiteParameter("@description", toUpdate.Description));
             updateLocSQL.Parameters.Add(new SQLiteParameter("@id", id));
             return ExecuteUpdate(updateLocSQL, "ModifyLocation");
             /*
