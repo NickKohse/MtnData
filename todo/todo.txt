@@ -10,3 +10,4 @@ TODO list:
 -better error checking on client side for new location page
 -get rid of unused using's in al files
 -find a better way to handle successful creation of a new location/user
+-write to/from string functions for coords so that it can be stored in the database
