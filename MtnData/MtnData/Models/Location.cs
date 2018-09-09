@@ -50,6 +50,44 @@ namespace MtnData.Models
 
         public Coordinate(double ns, double ew)
         {
+            CheckArgumentValidity(ns, ew);
+            NS = ns;
+            EW = ew;
+        }
+
+        public Coordinate(string x)
+        {
+            string[] split = x.Split(' ');
+            if (split.Length != 4)
+            {
+                throw new ArgumentException("String must have four space seperated values. This string had" + split.Length);
+            }
+            else
+            {
+                double ns = 0;
+                double ew = 0;
+                try
+                {
+                    ns = double.Parse(split[1]);
+                    ew = double.Parse(split[3]);
+                }
+                catch
+                {
+                    throw new ArgumentException("Unparseable field in input string, space seperated values 2 and 4 must be doubles.");
+                }
+                CheckArgumentValidity(ns, ew);
+                new Coordinate(ns, ew);
+            }
+        }
+
+        override
+        public string ToString()
+        {
+            return "NS: " + NS.ToString() + " EW: " + EW.ToString();
+        }
+
+        private void CheckArgumentValidity(double ns, double ew)
+        {
             if (ns > 90 || ns < -90)
             {
                 throw new ArgumentOutOfRangeException("ns", "North south parameter must be in [-90, 90]");
@@ -58,8 +96,7 @@ namespace MtnData.Models
             {
                 throw new ArgumentOutOfRangeException("ew", "East parameter must be in [-180, 180]");
             }
-            NS = ns;
-            EW = ew;
         }
+        
     }
 }

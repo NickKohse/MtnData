@@ -7,7 +7,8 @@ TODO list:
 -change modify attribute function to be more like modify location function, with extra complication of non changable attributes for user
 -think of better names for login and location actions
 -find a way to un-greyout verified checkbox if an admin is logged in
--better error checking on client side for new location page
--get rid of unused using's in al files
+-better error checking on client side for new location page(done?)
+-get rid of unused using's in all files
 -find a better way to handle successful creation of a new location/user
--write to/from string functions for coords so that it can be stored in the database
+-make region selection available from drop down list on add location page
+-create methods for searching a location
