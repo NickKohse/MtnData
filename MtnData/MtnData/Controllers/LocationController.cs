@@ -64,5 +64,24 @@ namespace MtnData.Controllers
                 return View("NewLocation");
             }
         }
+
+        public ActionResult SearchLoc(string keyword)
+        {
+            LocationConnect lc = new LocationConnect();
+            Message response = lc.SearchLocation(keyword);
+
+            if (response.GetResult())
+            {
+                //somehow return the payload of the message - List<Location> - to the page as clickable links
+                ViewBag.SearchResponse = "Found something, but showing it isn't implemented yet.\n";
+                return View("Index");
+            }
+            else
+            {
+                //return something that shows there are no responses
+                ViewBag.SearchResponse = response.GetText() + "\n";
+                return View("Index");
+            }
+        }
     }
 }

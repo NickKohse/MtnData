@@ -11,3 +11,7 @@ column Username is not unique
 Parameter name: value
 9/8/2018 7:03:53 PM: An exception has occured in the AddLocation function. Exception message:SQLite error
 table Destination has no column named Description
+9/10/2018 7:04:06 PM: Unparseable input in NewLoc function. Exception message: Value cannot be null.
+Parameter name: String
+9/10/2018 7:05:14 PM: Unparseable input in NewLoc function. Exception message: Value cannot be null.
+Parameter name: String

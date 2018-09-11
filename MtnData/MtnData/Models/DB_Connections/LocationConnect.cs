@@ -37,26 +37,6 @@ namespace MtnData.Models.DB_Connections
             addLocSQL.Parameters.Add(new SQLiteParameter("@description", toAdd.Description));
             return ExecuteUpdate(addLocSQL, "AddLocation");
 
-            /*
-            try
-            {
-                conn.Open();
-                int rows = addLocSQL.ExecuteNonQuery();
-                if (rows != 1)
-                {
-                    throw new Exception(rows + "rows were affected by inserting a location instead of the expected 1");
-                }
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                Utilities.ExceptionLogger("An exception has occured in the AddLocation function. Exception message:" + ex.Message);
-                return new Message(false, "An unexpected exception has occured");
-            }
-
-            return new Message(true, "Sucessfully added a location");
-            */
-
         }
 
         /// <summary>
@@ -83,26 +63,7 @@ namespace MtnData.Models.DB_Connections
             updateLocSQL.Parameters.Add(new SQLiteParameter("@description", toUpdate.Description));
             updateLocSQL.Parameters.Add(new SQLiteParameter("@id", id));
             return ExecuteUpdate(updateLocSQL, "ModifyLocation");
-            /*
-            try
-            {
-                conn.Open();
-                int rows = updateLocSQL.ExecuteNonQuery();
-                if (rows != 1)
-                {
-                    throw new Exception(rows + "rows were affected by modifying a location instead of the expected 1");
-                }
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                Utilities.ExceptionLogger("An exception has occured in the ModifyLocation function. Exception message:" + ex.Message);
-                return new Message(false, "An unexpected exception has occured");
-            }
-
-            return new Message(true, "Sucessfully modified a location");
-            */
-
+  
         }
 
         /// <summary>
@@ -116,26 +77,50 @@ namespace MtnData.Models.DB_Connections
             SQLiteCommand deleteLocSQL = new SQLiteCommand(sqlString, conn);
             deleteLocSQL.Parameters.Add(new SQLiteParameter("@id", id));
             return ExecuteUpdate(deleteLocSQL, "RemoveLocation");
+        }
 
-            /*
-            try
+        /// <summary>
+        /// Searchs the Destination table for a location whose name contains tha keyword provided.
+        /// In the future this will support searching values from other columns
+        /// </summary>
+        /// <param name="keyword">The keyword to search for</param>
+        /// <returns>A message with a list of Locations as its payload if any are found</returns>
+        public Message SearchLocation(string keyword)
+        {
+            string wildcard = "%" + keyword + "%";
+            string sqlString = @"SELECT * FROM DESTINATION WHERE Name LIKE @key";
+            conn.Open();
+            SQLiteCommand searchLocSQL = new SQLiteCommand(sqlString, conn);
+            searchLocSQL.Parameters.Add(new SQLiteParameter("@key", wildcard));
+            SQLiteDataReader res = searchLocSQL.ExecuteReader();
+
+            if (res.HasRows)
             {
-                conn.Open();
-                int rows = deleteLocSQL.ExecuteNonQuery();
-                if (rows != 1)
+                List<Location> found = new List<Location>();
+                while (res.NextResult())
                 {
-                    throw new Exception(rows + "rows were affected by deleting a location instead of the expected 1");
+                    object[] oarr = new object[12];
+                    try
+                    {
+                        res.GetValues(oarr);
+                        found.Add(new Location((string)oarr[1], (string)oarr[2], (int)oarr[3], (float)oarr[4], new Coordinate((string)oarr[5]), new Coordinate((string)oarr[6]),
+                            (int)oarr[7], (int)oarr[8], (int)oarr[9], (bool)oarr[10], (string)oarr[11]));//this isn't ideal
+                    }
+                    catch (Exception ex)
+                    {
+                        Utilities.ExceptionLogger("Exception in SearchLocation function: " + ex.Message);
+                        conn.Close();
+                        return new Message(false, "Hit following exception while trynig to parse location search results: " + ex.Message);
+                    }
                 }
                 conn.Close();
+                return new Message(true, "Found location(s) corresponing to the given keyword", found);
             }
-            catch (Exception ex)
+            else
             {
-                Utilities.ExceptionLogger("An exception has occured in the RemoveLocation function. Exception message:" + ex.Message);
-                return new Message(false, "An unexpected exception has occured");
+                conn.Close();
+                return new Message(false, "Couldn't find a location containing the following string: " + keyword);
             }
-
-            return new Message(true, "Sucessfully deleted a location");
-            */
         }
     }
 }

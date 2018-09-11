@@ -5,5 +5,15 @@
 
 <h2>Index</h2>
 <p>Eventually this will be the page to search for locations from</p>
+
+@using (Html.BeginForm("SearchLoc", "Location", FormMethod.Get,
+                            new { id = "createForm" }))
+{
+    <h3>Search Keyword:</h3>
+    <input type="text" size="20" name="keyword" />
+    <br />
+    <input type="submit" value="Search" />
+}
+@ViewBag.SearchResponse
 @Html.ActionLink("Add a new location to the system", "NewLocation");
 

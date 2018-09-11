@@ -12,14 +12,17 @@ namespace MtnData.Models.Messages
     {
         private bool result;
         private string text;
-        public Message(bool r, string t)
+        private object payload;
+        public Message(bool r, string t, object p = null)
         {
             result = r;
             text = t;
+            payload = p;
         }
 
-        public bool GetResult(){ return result; }
-        public string GetText(){ return text; }
+        public bool GetResult() { return result; }
+        public string GetText() { return text; }
+        public object GetPayload() { return payload; }
     }
 
     public class LoginMessage : Message
