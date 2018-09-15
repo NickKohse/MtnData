@@ -15,3 +15,7 @@ TODO list:
 -proofread comments
 -Create single format for writing error/exception messages
 -Find a way to show results of searching a location
+-Make a page for each location
+-create a cache of locations for the user to keep in memory for the session (10-20 locations)
+-give the option to add e new location if its not found in the database
+-fix casting issue in location search ***

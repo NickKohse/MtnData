@@ -15,3 +15,5 @@ table Destination has no column named Description
 Parameter name: String
 9/10/2018 7:05:14 PM: Unparseable input in NewLoc function. Exception message: Value cannot be null.
 Parameter name: String
+9/15/2018 4:05:56 PM: Exception in SearchLocation function: Specified cast is not valid.
+9/15/2018 4:12:08 PM: Exception in SearchLocation function: Specified cast is not valid.

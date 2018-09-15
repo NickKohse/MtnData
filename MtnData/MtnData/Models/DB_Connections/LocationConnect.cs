@@ -97,14 +97,17 @@ namespace MtnData.Models.DB_Connections
             if (res.HasRows)
             {
                 List<Location> found = new List<Location>();
-                while (res.NextResult())
+                object[] oarr = new object[12];
+                res.GetValues(oarr);
+                do
                 {
-                    object[] oarr = new object[12];
+                    oarr = new object[12];
                     try
                     {
                         res.GetValues(oarr);
                         found.Add(new Location((string)oarr[1], (string)oarr[2], (int)oarr[3], (float)oarr[4], new Coordinate((string)oarr[5]), new Coordinate((string)oarr[6]),
                             (int)oarr[7], (int)oarr[8], (int)oarr[9], (bool)oarr[10], (string)oarr[11]));//this isn't ideal
+                        System.Diagnostics.Debug.WriteLine(found.Count + "-----");
                     }
                     catch (Exception ex)
                     {
@@ -112,8 +115,9 @@ namespace MtnData.Models.DB_Connections
                         conn.Close();
                         return new Message(false, "Hit following exception while trynig to parse location search results: " + ex.Message);
                     }
-                }
+                } while (res.NextResult());
                 conn.Close();
+                System.Diagnostics.Debug.WriteLine(found.Count);
                 return new Message(true, "Found location(s) corresponing to the given keyword", found);
             }
             else

@@ -83,5 +83,28 @@ namespace MtnData.Controllers
                 return View("Index");
             }
         }
+
+        public ActionResult ShowLocation(string name)
+        {
+            LocationConnect lc = new LocationConnect();
+            Message response = lc.SearchLocation(name);
+
+            if (!response.GetResult())
+            {
+                ViewBag.searchLocationMessage = "We have no record of a location by that name";
+            }
+            else
+            {
+                List<Location> locList = (List<Location>)response.GetPayload();
+                if(locList.Count > 1) //This should realisiticly never happen
+                {
+                    ViewBag.searchLocationMessage = "Something has gone worng.";
+                    Utilities.EventLogger("Found more than one location with the same name trying to show a location.", Globals.LOG_LEVELS.Critical);
+                }
+                ViewBag.searchLocationResult = locList.ElementAt(0);
+            }
+            return View();
+            
+        }
     }
 }
