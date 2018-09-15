@@ -105,8 +105,20 @@ namespace MtnData.Models.DB_Connections
                     try
                     {
                         res.GetValues(oarr);
-                        found.Add(new Location((string)oarr[1], (string)oarr[2], (int)oarr[3], (float)oarr[4], new Coordinate((string)oarr[5]), new Coordinate((string)oarr[6]),
-                            (int)oarr[7], (int)oarr[8], (int)oarr[9], (bool)oarr[10], (string)oarr[11]));//this isn't ideal
+                        string s = (string)oarr[1];
+                        string s1 = (string)oarr[2];
+                        long i = (long)oarr[3];
+                        double f = (double)oarr[4];
+                        string s2 = (string)oarr[5];
+                        string s3 = (string)oarr[6];
+                        long i1 = (long)oarr[7];
+                        long i3 = (long)oarr[8];
+                        long i4 = (long)oarr[9];
+                        long i5 = (long)oarr[10];
+                        string s4 = (string)oarr[11];
+                        
+                        found.Add(new Location((string)oarr[1], (string)oarr[2], (long)oarr[3], (double)oarr[4], new Coordinate((string)oarr[5]), new Coordinate((string)oarr[6]),
+                            (long)oarr[7], (long)oarr[8], (long)oarr[9], (long)oarr[10], (string)oarr[11]));//this isn't ideal
                         System.Diagnostics.Debug.WriteLine(found.Count + "-----");
                     }
                     catch (Exception ex)

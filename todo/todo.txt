@@ -19,3 +19,5 @@ TODO list:
 -create a cache of locations for the user to keep in memory for the session (10-20 locations)
 -give the option to add e new location if its not found in the database
 -fix casting issue in location search ***
+-make a decision between peakev and finalev
+-move todo list into readme

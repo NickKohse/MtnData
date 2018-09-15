@@ -25,7 +25,7 @@ namespace MtnData.Controllers
         public ActionResult NewLoc(string name, string region, string evGain, string distance, string startN, string startW, string endN, string endW, string pDiff, string TDiff, string peakEv, string verified, string description)
         {
             int ev_gain = 0;
-            int dist = 0;
+            float dist = 0;
             int physical = 0;
             int technical = 0;
             int final = 0;
@@ -35,7 +35,7 @@ namespace MtnData.Controllers
             try
             {
                 ev_gain = int.Parse(evGain);
-                dist = int.Parse(distance);
+                dist = float.Parse(distance);
                 physical = int.Parse(pDiff);
                 technical = int.Parse(TDiff);
                 final = int.Parse(peakEv);
@@ -48,7 +48,7 @@ namespace MtnData.Controllers
             {
                 Utilities.ExceptionLogger("Unparseable input in NewLoc function. Exception message: " + ex.Message);
             }
-            Location newLoc = new Location(name, region, ev_gain, dist, start, end, physical, technical, final, false /*for now a new location is always unverified*/, description);
+            Location newLoc = new Location(name, region, ev_gain, dist, start, end, physical, technical, final, 0 /*for now a new location is always unverified*/, description);
             LocationConnect lc = new LocationConnect();
             Message response = lc.AddLocation(newLoc);
 

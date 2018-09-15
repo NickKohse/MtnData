@@ -9,17 +9,17 @@ namespace MtnData.Models
     {
         public string Name { get; private set; }
         public string Region { get; private set; }
-        public int EvGain { get; private set; }
-        public float Distance { get; private set; }
+        public long EvGain { get; private set; }
+        public double Distance { get; private set; }
         public Coordinate Start { get; private set; }
         public Coordinate End { get; private set; }
-        public int PDiff { get; private set; }
-        public int TDiff { get; private set; }
-        public int FinalEv { get; private set; }
-        public bool Verified { get; private set; }
+        public long PDiff { get; private set; }
+        public long TDiff { get; private set; }
+        public long FinalEv { get; private set; }
+        public long Verified { get; private set; }
         public string Description { get; private set; }
 
-        public Location(string name, string region, int evGain, float distance, Coordinate start, Coordinate end, int pDiff, int tDiff, int finalEv, bool verified, string description)
+        public Location(string name, string region, long evGain, double distance, Coordinate start, Coordinate end, long pDiff, long tDiff, long finalEv, long verified, string description)
         {
             if (pDiff < 1 || pDiff > 5)
             {
@@ -76,7 +76,8 @@ namespace MtnData.Models
                     throw new ArgumentException("Unparseable field in input string, space seperated values 2 and 4 must be doubles.");
                 }
                 CheckArgumentValidity(ns, ew);
-                new Coordinate(ns, ew);
+                NS = ns;
+                EW = ew;
             }
         }
 

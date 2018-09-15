@@ -1,3 +1,4 @@
 9/8/2018 7:03:53 PM: ERROR: Couldn't create a new location named: nick Resulting message: An unexpected exception has occured
 9/8/2018 7:17:53 PM: INFO: Created a new location named: nick
 9/10/2018 7:14:03 PM: INFO: Created a new location named: TestLocation
+9/15/2018 5:16:50 PM: INFO: Created a new location named: TestLocation2
