@@ -10,7 +10,12 @@ namespace MtnData.Models
     public abstract class DBConnect
     {        
         protected string dbConnectString = @"Data Source = " + Globals.baseProgramDir + "mtn.sqlite3; Version=3;";
-        protected SQLiteConnection conn;     
+        protected SQLiteConnection conn;
+
+        public DBConnect()
+        {
+            conn = new SQLiteConnection(dbConnectString);
+        }
         
         /// <summary>
         /// A function that handles performing a database update and the error checking/logging associated with that

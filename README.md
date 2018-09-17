@@ -27,8 +27,10 @@ A web based platform to track trip reports on alpine trails.
 - give the option to add e new location if its not found in the database
 - fix casting issue in location search ***
 - make a decision between peakev and finalev
-- move todo list into readme
 - fix rounding when displaying distance
 - Add ability to add comments on a location
 - Add a way for the location page to render the comments
 - Make sure the show location page doesn't render the full page if there is no location
+- Change DBConnect inheritance so none of the sub classes have ctors since they don't do anything
+- Find a better location for GoodPassword function
+- Finish function comments

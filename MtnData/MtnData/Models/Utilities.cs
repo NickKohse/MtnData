@@ -22,6 +22,16 @@ namespace MtnData.Models
             return true;
         }
 
+        /// <summary>
+        /// Returns current unix time in seconds
+        /// </summary>
+        /// <returns></returns>
+        public static long UnixTimeNow()
+        {
+            var timeSpan = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0));
+            return (long)timeSpan.TotalSeconds;
+        }
+
         public static void ExceptionLogger(string messageToLog)
         {
             //**********handle exceptions            

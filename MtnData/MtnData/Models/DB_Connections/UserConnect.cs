@@ -10,10 +10,8 @@ namespace MtnData.Models
 {
     public class UserConnect : DBConnect
     {
-        public UserConnect()
-        {
-            conn = new SQLiteConnection(dbConnectString);
-        }
+        public UserConnect() : base() {}
+
         public readonly List<string> CHANGABLE_USER_ATTRIBUTES = new List<string>() { "Email", "Password", "Name" };
         /// <summary>
         /// This function is used to add another user to the User table of the db

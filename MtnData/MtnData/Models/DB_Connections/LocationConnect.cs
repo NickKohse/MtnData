@@ -9,10 +9,7 @@ namespace MtnData.Models.DB_Connections
 {
     public class LocationConnect : DBConnect
     {
-        public LocationConnect()
-        {
-            conn = new SQLiteConnection(dbConnectString);
-        }
+        public LocationConnect() : base() {}
 
         /// <summary>
         /// Add a new location to the database. This funcation doesn't check to see if any values are unique because no values in this tbale have to be 
