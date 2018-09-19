@@ -151,6 +151,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB_Connections\CommentConnect.cs" />
     <Compile Include="Models\DB_Connections\LocationConnect.cs" />
     <Compile Include="Models\Exceptions.cs" />
     <Compile Include="Models\Location.cs" />
@@ -206,6 +207,7 @@
     <Content Include="Views\Location\Index.cshtml" />
     <Content Include="Views\Location\Created.cshtml" />
     <Content Include="Views\Location\ShowLocation.cshtml" />
+    <Content Include="Views\Location\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

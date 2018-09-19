@@ -9,6 +9,7 @@ namespace MtnData.Models
     {
         public enum USER_TYPES { Owner, Admin, Regular };
         public enum LOG_LEVELS { Info, Audit, Error, Critical };
+        public enum LOCATION_SEARCHABLE_ATTRIBUTES { Name, ID };
         public const string baseProgramDir = @"C:\Users\Nick-Desktop\Documents\MtnData\";
 
 

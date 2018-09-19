@@ -10,7 +10,7 @@ namespace MtnData.Models
 {
     public class UserConnect : DBConnect
     {
-        public UserConnect() : base() {}
+        public UserConnect() : base() { }
 
         public readonly List<string> CHANGABLE_USER_ATTRIBUTES = new List<string>() { "Email", "Password", "Name" };
         /// <summary>
@@ -23,11 +23,11 @@ namespace MtnData.Models
         /// <returns>True if user is sucessfuly added, false otherwise</returns>
         public Message AddUser(string name, string username, string password, string email)
         {
-            if (!UniqueInEmail(email))
+            if (!UniqueAttribute(email, Columns.Email))
             {
                 return new Message(false, "Email is being used by another user");
             }
-            if (!UniqueInUsername(username))
+            if (!UniqueAttribute(username, Columns.Username))
             {
                 return new Message(false, "Username is being used by another user");
             }
@@ -36,7 +36,7 @@ namespace MtnData.Models
                 return new Message(false, "Password too weak");
             }
             string sqlString = @"INSERT INTO User (Name, Email, Username, Password, Type) VALUES (@name,@email,@username,@password,@type)";
-            SQLiteCommand addUserSQL = new SQLiteCommand(sqlString , conn);
+            SQLiteCommand addUserSQL = new SQLiteCommand(sqlString, conn);
             addUserSQL.Parameters.Add(new SQLiteParameter("@name", name));
             addUserSQL.Parameters.Add(new SQLiteParameter("@email", email));
             addUserSQL.Parameters.Add(new SQLiteParameter("@username", username));
@@ -97,7 +97,7 @@ namespace MtnData.Models
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Utilities.ExceptionLogger("An exception has occured in the ChangePass function. Exception message:" + ex.Message);
                 return new Message(false, "An unexpected exception has occured");
@@ -123,7 +123,7 @@ namespace MtnData.Models
         {
             string SqlString = @"SELECT Name, Username, Email, Type FROM User WHERE Username= @user AND Password= @pass";
             SQLiteCommand login = new SQLiteCommand(SqlString, conn);
-            
+
             login.Parameters.Add(new SQLiteParameter("@user", username));
             login.Parameters.Add(new SQLiteParameter("@pass", pass));
             User toReturn = null;
@@ -138,14 +138,14 @@ namespace MtnData.Models
                 }
                 else //not checking for the case of more than one row returned as its logically impossible
                 {
-                    object [] oarr = new object[4];
+                    object[] oarr = new object[4];
                     res.GetValues(oarr);
                     toReturn = new User(oarr[0].ToString(), oarr[1].ToString(), oarr[2].ToString(), Int32.Parse(oarr[3].ToString()));
                 }
                 res.Close();
                 conn.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 Utilities.ExceptionLogger("An exception has occurred in the Login function. Exception message:" + ex.Message);
@@ -161,7 +161,8 @@ namespace MtnData.Models
         /// <param name="col"> column to check</param>
         /// <param name="entry"> value to check</param>
         /// <returns> true if it is unique</returns>
-        private bool UniqueInUsername(string username)
+        private enum Columns{ Username, Email }
+        private bool UniqueInUsername(string username, Columns c)
         {
             string SqlString = @"SELECT * FROM User WHERE Username= @val";
             SQLiteCommand findSame = new SQLiteCommand(SqlString, conn);
@@ -179,11 +180,43 @@ namespace MtnData.Models
             return true;
         }
 
-        private bool UniqueInEmail(string email)
+        private bool UniqueInEmail(string email, Columns c)
         {
             string SqlString = @"SELECT * FROM User WHERE Email= @val";
             SQLiteCommand findSame = new SQLiteCommand(SqlString, conn);
             findSame.Parameters.Add(new SQLiteParameter("@val", email));
+            conn.Open();
+            SQLiteDataReader res = findSame.ExecuteReader();
+
+            //*********handle exception by throwing
+            if (res.HasRows)
+            {
+                conn.Close();
+                return false;
+            }
+            conn.Close();
+            return true;
+        }
+        /// <summary>
+        /// Hopefuly this fixes the above problem
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        private bool UniqueAttribute(string element, Columns c)
+        {
+            string SqlString = "";
+            switch (c)
+            {
+                case (Columns.Email):
+                    SqlString = @"SELECT * FROM User WHERE Email= @val";
+                    break;
+                case (Columns.Username):
+                    SqlString = @"SELECT * FROM User WHERE Username= @val";
+                    break;
+            }
+            SQLiteCommand findSame = new SQLiteCommand(SqlString, conn);
+            findSame.Parameters.Add(new SQLiteParameter("@val", element));
             conn.Open();
             SQLiteDataReader res = findSame.ExecuteReader();
 

@@ -68,7 +68,7 @@ namespace MtnData.Controllers
         public ActionResult SearchLoc(string keyword)
         {
             LocationConnect lc = new LocationConnect();
-            Message response = lc.SearchLocation(keyword);
+            Message response = lc.SearchLocation(keyword, Globals.LOCATION_SEARCHABLE_ATTRIBUTES.Name);
 
             if (response.GetResult())
             {
@@ -84,22 +84,24 @@ namespace MtnData.Controllers
             }
         }
 
-        public ActionResult ShowLocation(string name)
+        public ActionResult ShowLocation(string id)
         {
             LocationConnect lc = new LocationConnect();
-            Message response = lc.SearchLocation(name);
+            Message response = lc.SearchLocation(id, Globals.LOCATION_SEARCHABLE_ATTRIBUTES.ID);
 
             if (!response.GetResult())
             {
-                ViewBag.searchLocationMessage = "We have no record of a location by that name";
+                ViewBag.ErrorMessage = "Unable to find the given location.";
+                return View("Error");
             }
             else
             {
                 List<Location> locList = (List<Location>)response.GetPayload();
                 if(locList.Count > 1) //This should realisiticly never happen
                 {
-                    ViewBag.searchLocationMessage = "Something has gone worng.";
-                    Utilities.EventLogger("Found more than one location with the same name trying to show a location.", Globals.LOG_LEVELS.Critical);
+                    ViewBag.ErrorMessage = "Something has gone worng in the location database";
+                    Utilities.EventLogger("Found more than one location with the same id trying to show a location.", Globals.LOG_LEVELS.Critical);
+                    return View("Error");
                 }
                 ViewBag.searchLocationResult = locList.ElementAt(0);
             }

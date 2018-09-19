@@ -28,10 +28,10 @@ namespace MtnData.Models.DB_Connections
             addCommentSQL.Parameters.Add(new SQLiteParameter("@text", text));
             return ExecuteUpdate(addCommentSQL, "AddComment");
         }
-
+        /*
         public Message GetLocationComments(int locID)
         {
 
-        }
+        }*/
     }
 }

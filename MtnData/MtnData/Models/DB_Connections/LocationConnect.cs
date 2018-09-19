@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.SQLite;
 using MtnData.Models.Messages;
+using static MtnData.Models.Globals;
 
 namespace MtnData.Models.DB_Connections
 {
@@ -24,8 +25,8 @@ namespace MtnData.Models.DB_Connections
             addLocSQL.Parameters.Add(new SQLiteParameter("@name", toAdd.Name));
             addLocSQL.Parameters.Add(new SQLiteParameter("@region", toAdd.Region));
             addLocSQL.Parameters.Add(new SQLiteParameter("@evgain", toAdd.EvGain));
-            addLocSQL.Parameters.Add(new SQLiteParameter("@distance", toAdd.Distance));
-            addLocSQL.Parameters.Add(new SQLiteParameter("@coords", toAdd.Start));
+            addLocSQL.Parameters.Add(new SQLiteParameter("@distance", Math.Round(toAdd.Distance, 2)));
+            addLocSQL.Parameters.Add(new SQLiteParameter("@coords", toAdd.Start)); //why does this work?
             addLocSQL.Parameters.Add(new SQLiteParameter("@endcoords", toAdd.End));
             addLocSQL.Parameters.Add(new SQLiteParameter("@pdiff", toAdd.PDiff));
             addLocSQL.Parameters.Add(new SQLiteParameter("@tdiff", toAdd.TDiff));
@@ -76,19 +77,31 @@ namespace MtnData.Models.DB_Connections
             return ExecuteUpdate(deleteLocSQL, "RemoveLocation");
         }
 
+
         /// <summary>
         /// Searchs the Destination table for a location whose name contains tha keyword provided.
         /// In the future this will support searching values from other columns
         /// </summary>
         /// <param name="keyword">The keyword to search for</param>
         /// <returns>A message with a list of Locations as its payload if any are found</returns>
-        public Message SearchLocation(string keyword)
+        public Message SearchLocation(string keyword, LOCATION_SEARCHABLE_ATTRIBUTES sa)
         {
-            string wildcard = "%" + keyword + "%";
-            string sqlString = @"SELECT * FROM DESTINATION WHERE Name LIKE @key";
+            SQLiteCommand searchLocSQL = null;
+            string sqlString = "";
+            switch (sa)
+            {           
+                case LOCATION_SEARCHABLE_ATTRIBUTES.Name:
+                    keyword = "%" + keyword + "%";
+                    sqlString = @"SELECT * FROM DESTINATION WHERE Name LIKE @key";
+                    break;
+                case LOCATION_SEARCHABLE_ATTRIBUTES.ID:
+                    sqlString = @"SELECT * FROM DESTINATION WHERE Id=@key";
+                    break;
+            }
+            searchLocSQL = new SQLiteCommand(sqlString, conn);
+            searchLocSQL.Parameters.Add(new SQLiteParameter("@key", keyword));
             conn.Open();
-            SQLiteCommand searchLocSQL = new SQLiteCommand(sqlString, conn);
-            searchLocSQL.Parameters.Add(new SQLiteParameter("@key", wildcard));
+
             SQLiteDataReader res = searchLocSQL.ExecuteReader();
 
             if (res.HasRows)
