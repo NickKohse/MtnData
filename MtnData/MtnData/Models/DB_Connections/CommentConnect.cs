@@ -20,6 +20,7 @@ namespace MtnData.Models.DB_Connections
         /// <returns>A message which realys whether or not the operation was sucessful</returns>
         public Message AddComment(string text, int userID, int locID)
         {
+            //check referential integrity
             string sqlString = @"INSERT INTO Comment (DestId, UserId, Time, Text) VALUES(@locID, @userID, @time, @text)";
             SQLiteCommand addCommentSQL = new SQLiteCommand(sqlString, conn);
             addCommentSQL.Parameters.Add(new SQLiteParameter("@locID", locID));
@@ -28,10 +29,39 @@ namespace MtnData.Models.DB_Connections
             addCommentSQL.Parameters.Add(new SQLiteParameter("@text", text));
             return ExecuteUpdate(addCommentSQL, "AddComment");
         }
-        /*
+        
         public Message GetLocationComments(int locID)
         {
+            string sqlString = @"SELECT * FROM COMMENT WHERE Id=@id";
+            SQLiteCommand getCommentsSQL = new SQLiteCommand(sqlString, conn);
+            getCommentsSQL.Parameters.Add(new SQLiteParameter("@id", locID));
 
-        }*/
+            SQLiteDataReader results = getCommentsSQL.ExecuteReader();
+
+            if (results.HasRows)
+            {
+                List<Comment> commentList = new List<Comment>();
+                do
+                {
+                    object[] oarr = new object[5];
+                    try
+                    {
+                        results.GetValues(oarr);
+                        commentList.Add(new Comment((long)oarr[3], (long)oarr[2], (long)oarr[1], (string)oarr[4]);
+                    }
+                    catch (Exception ex)
+                    {
+                        Utilities.ExceptionLogger("Hit exception while trying to parse comment from DB: " + ex.Message);
+                        return new Message(false, "ERROR: Unable to parse comments successfully at this time.");
+                    }
+
+                } while (results.NextResult());
+                return new Message(true, "Found comments for location, returning List<Comment>", commentList);
+            }
+            else
+            {
+                return new Message(false, "No comments exist for this location");
+            }
+        }
     }
 }

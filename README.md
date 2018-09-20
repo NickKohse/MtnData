@@ -34,3 +34,4 @@ A web based platform to track trip reports on alpine trails.
 - Change DBConnect inheritance so none of the sub classes have ctors since they don't do anything
 - Find a better location for GoodPassword function
 - Finish function comments
+- Check in add comment function to make sure referential integrity is intact before adding
