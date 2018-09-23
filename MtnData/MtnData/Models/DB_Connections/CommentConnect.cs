@@ -47,7 +47,7 @@ namespace MtnData.Models.DB_Connections
                     try
                     {
                         results.GetValues(oarr);
-                        commentList.Add(new Comment((long)oarr[3], (long)oarr[2], (long)oarr[1], (string)oarr[4]);
+                        commentList.Add(new Comment((long)oarr[3], (long)oarr[2], (long)oarr[1], (string)oarr[4]));
                     }
                     catch (Exception ex)
                     {

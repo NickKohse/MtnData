@@ -35,3 +35,4 @@ A web based platform to track trip reports on alpine trails.
 - Find a better location for GoodPassword function
 - Finish function comments
 - Check in add comment function to make sure referential integrity is intact before adding
+- Make all local variables camel case including viewbag ones

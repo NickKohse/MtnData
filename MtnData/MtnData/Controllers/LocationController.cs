@@ -103,7 +103,7 @@ namespace MtnData.Controllers
                     Utilities.EventLogger("Found more than one location with the same id trying to show a location.", Globals.LOG_LEVELS.Critical);
                     return View("Error");
                 }
-                ViewBag.searchLocationResult = locList.ElementAt(0);
+                ViewBag.locList = locList;
             }
             return View();
             

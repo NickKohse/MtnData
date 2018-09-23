@@ -14,6 +14,26 @@
     <br />
     <input type="submit" value="Search" />
 }
-@ViewBag.SearchResponse
+@{
+    var list = ViewBag.locList;
+    <p>list==null</p>
+    if (list != null)
+    {
+        <p>@list.Count</p>
+        <p>test before logic</p>
+        if (list.count > 0)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+
+                <p>@list.ElementAt(i).Name</p>
+            }
+        }
+        else
+        {
+            <p>No location by that name exist</p>
+        }
+    }
+}
 @Html.ActionLink("Add a new location to the system", "NewLocation");
 
