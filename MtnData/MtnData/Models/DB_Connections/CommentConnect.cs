@@ -41,7 +41,7 @@ namespace MtnData.Models.DB_Connections
             if (results.HasRows)
             {
                 List<Comment> commentList = new List<Comment>();
-                do
+                while (results.Read())
                 {
                     object[] oarr = new object[5];
                     try
@@ -55,7 +55,7 @@ namespace MtnData.Models.DB_Connections
                         return new Message(false, "ERROR: Unable to parse comments successfully at this time.");
                     }
 
-                } while (results.NextResult());
+                } 
                 return new Message(true, "Found comments for location, returning List<Comment>", commentList);
             }
             else

@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "SearchResults";
+}
+
+<h2>SearchResults</h2>
+@{
+    var list = ViewBag.locList;
+
+    <p>@list.Count</p>
+    <p>test before logic</p>
+    if (list.count > 0)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+
+            <p>@list.ElementAt(i).Name</p>
+        }
+    }
+    else
+    {
+        <p>No location by that name exist</p>
+    }
+    
+}
+

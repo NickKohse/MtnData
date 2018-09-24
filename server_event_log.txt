@@ -2,3 +2,4 @@
 9/8/2018 7:17:53 PM: INFO: Created a new location named: nick
 9/10/2018 7:14:03 PM: INFO: Created a new location named: TestLocation
 9/15/2018 5:16:50 PM: INFO: Created a new location named: TestLocation2
+9/23/2018 6:42:53 PM: INFO: Created a new location named: TestLocation3

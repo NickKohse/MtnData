@@ -36,3 +36,5 @@ A web based platform to track trip reports on alpine trails.
 - Finish function comments
 - Check in add comment function to make sure referential integrity is intact before adding
 - Make all local variables camel case including viewbag ones
+- Remove unnecessary console writes 
+- Why doesnt search location show message when there are no results

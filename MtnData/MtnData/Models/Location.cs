@@ -7,6 +7,7 @@ namespace MtnData.Models
 {
     public class Location
     {
+        public long Id { get; private set; }
         public string Name { get; private set; }
         public string Region { get; private set; }
         public long EvGain { get; private set; }
@@ -19,7 +20,7 @@ namespace MtnData.Models
         public long Verified { get; private set; }
         public string Description { get; private set; }
 
-        public Location(string name, string region, long evGain, double distance, Coordinate start, Coordinate end, long pDiff, long tDiff, long finalEv, long verified, string description)
+        public Location(long id, string name, string region, long evGain, double distance, Coordinate start, Coordinate end, long pDiff, long tDiff, long finalEv, long verified, string description)
         {
             if (pDiff < 1 || pDiff > 5)
             {
@@ -30,6 +31,7 @@ namespace MtnData.Models
             {
                 throw new ArgumentOutOfRangeException("tDiff", "TDiff must be in [1,5]");
             }
+            Id = id;
             Name = name;
             Region = region;
             EvGain = evGain;

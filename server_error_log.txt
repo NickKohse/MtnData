@@ -20,3 +20,4 @@ Parameter name: String
 9/15/2018 4:34:31 PM: Exception in SearchLocation function: Specified cast is not valid.
 9/15/2018 4:43:08 PM: Exception in SearchLocation function: Specified cast is not valid.
 9/15/2018 5:11:09 PM: Unparseable input in NewLoc function. Exception message: Input string was not in a correct format.
+9/23/2018 7:15:22 PM: Exception in SearchLocation function: Specified cast is not valid.

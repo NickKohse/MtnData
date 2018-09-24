@@ -209,6 +209,7 @@
     <Content Include="Views\Location\Created.cshtml" />
     <Content Include="Views\Location\ShowLocation.cshtml" />
     <Content Include="Views\Location\Error.cshtml" />
+    <Content Include="Views\Location\SearchResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

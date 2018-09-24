@@ -16,23 +16,22 @@
 }
 @{
     var list = ViewBag.locList;
-    <p>list==null</p>
     if (list != null)
     {
-        <p>@list.Count</p>
-        <p>test before logic</p>
-        if (list.count > 0)
+        <h3>Search Results:</h3>
+        if (list.Count > 0)
         {
             for (int i = 0; i < list.Count; i++)
             {
-
-                <p>@list.ElementAt(i).Name</p>
+                <a href="ShowLocation/?id=@list[i].Id">@list[i].Name</a>
+                <br />
             }
         }
         else
         {
             <p>No location by that name exist</p>
         }
+        <br />
     }
 }
 @Html.ActionLink("Add a new location to the system", "NewLocation");

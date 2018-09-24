@@ -48,7 +48,7 @@ namespace MtnData.Controllers
             {
                 Utilities.ExceptionLogger("Unparseable input in NewLoc function. Exception message: " + ex.Message);
             }
-            Location newLoc = new Location(name, region, ev_gain, dist, start, end, physical, technical, final, 0 /*for now a new location is always unverified*/, description);
+            Location newLoc = new Location(0, name, region, ev_gain, dist, start, end, physical, technical, final, 0 /*for now a new location is always unverified*/, description);
             LocationConnect lc = new LocationConnect();
             Message response = lc.AddLocation(newLoc);
 
@@ -73,13 +73,13 @@ namespace MtnData.Controllers
             if (response.GetResult())
             {
                 //somehow return the payload of the message - List<Location> - to the page as clickable links
-                ViewBag.SearchResponse = "Found something, but showing it isn't implemented yet.\n";
+                ViewBag.locList = (List<Location>)response.GetPayload();
                 return View("Index");
             }
             else
             {
                 //return something that shows there are no responses
-                ViewBag.SearchResponse = response.GetText() + "\n";
+                ViewBag.locList = (List<Location>)response.GetPayload();
                 return View("Index");
             }
         }
@@ -103,7 +103,7 @@ namespace MtnData.Controllers
                     Utilities.EventLogger("Found more than one location with the same id trying to show a location.", Globals.LOG_LEVELS.Critical);
                     return View("Error");
                 }
-                ViewBag.locList = locList;
+                ViewBag.searchLocationResult = locList.ElementAt(0);
             }
             return View();
             
