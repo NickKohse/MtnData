@@ -18,7 +18,7 @@ namespace MtnData.Models.DB_Connections
         /// <param name="userID">The id of the user making the comment</param>
         /// <param name="locID">The id of the location the comment is being made about</param>
         /// <returns>A message which realys whether or not the operation was sucessful</returns>
-        public Message AddComment(string text, int userID, int locID)
+        public Message AddComment(string text, int userID, long locID)
         {
             //check referential integrity
             string sqlString = @"INSERT INTO Comment (DestId, UserId, Time, Text) VALUES(@locID, @userID, @time, @text)";
@@ -30,12 +30,13 @@ namespace MtnData.Models.DB_Connections
             return ExecuteUpdate(addCommentSQL, "AddComment");
         }
         
-        public Message GetLocationComments(int locID)
+        public Message GetLocationComments(string locID)
         {
             string sqlString = @"SELECT * FROM COMMENT WHERE Id=@id";
             SQLiteCommand getCommentsSQL = new SQLiteCommand(sqlString, conn);
             getCommentsSQL.Parameters.Add(new SQLiteParameter("@id", locID));
 
+            conn.Open();
             SQLiteDataReader results = getCommentsSQL.ExecuteReader();
 
             if (results.HasRows)
@@ -51,15 +52,18 @@ namespace MtnData.Models.DB_Connections
                     }
                     catch (Exception ex)
                     {
+                        conn.Close();
                         Utilities.ExceptionLogger("Hit exception while trying to parse comment from DB: " + ex.Message);
                         return new Message(false, "ERROR: Unable to parse comments successfully at this time.");
                     }
 
-                } 
+                }
+                conn.Close();
                 return new Message(true, "Found comments for location, returning List<Comment>", commentList);
             }
             else
             {
+                conn.Close();
                 return new Message(false, "No comments exist for this location");
             }
         }

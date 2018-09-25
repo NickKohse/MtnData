@@ -76,7 +76,7 @@ namespace MtnData.Controllers
                 ViewBag.locList = (List<Location>)response.GetPayload();
                 return View("Index");
             }
-            else
+            else //doesn't make any sense, dont return payload if it's going to be null
             {
                 //return something that shows there are no responses
                 ViewBag.locList = (List<Location>)response.GetPayload();
@@ -88,6 +88,7 @@ namespace MtnData.Controllers
         {
             LocationConnect lc = new LocationConnect();
             Message response = lc.SearchLocation(id, Globals.LOCATION_SEARCHABLE_ATTRIBUTES.ID);
+
 
             if (!response.GetResult())
             {
@@ -104,9 +105,28 @@ namespace MtnData.Controllers
                     return View("Error");
                 }
                 ViewBag.searchLocationResult = locList.ElementAt(0);
+                Globals.PRESENT_LOC = locList.ElementAt(0);
+                CommentConnect cc = new CommentConnect();
+                Message commentResponse = cc.GetLocationComments(id);
+                if (commentResponse.GetResult())
+                {
+                    List<Comment> commList = (List<Comment>)commentResponse.GetPayload();
+                    ViewBag.locationCommentResult = commList;
+                }
+                else
+                {
+                    ViewBag.locationCommentError = commentResponse.GetText();
+                }
             }
-            return View();
-            
+            return View();            
+        }
+
+        public ActionResult AddComment(string text)
+        {
+            CommentConnect cc = new CommentConnect();
+            cc.AddComment(text, 5 /*somehow get userid from storage*/, Globals.PRESENT_LOC.Id);
+            ViewBag.searchLocationResult = Globals.PRESENT_LOC;
+            return View("ShowLocation");
         }
     }
 }

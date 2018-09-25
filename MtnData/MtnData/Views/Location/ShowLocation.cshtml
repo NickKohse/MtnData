@@ -1,5 +1,5 @@
 ﻿@ViewBag.searchLocationMessage
-@{ 
+@{
     var loc = ViewBag.searchLocationResult;
 }
 <h3>@loc.Name</h3>
@@ -12,3 +12,36 @@
 <h4>Physical Difficulty</h4><p>@loc.PDiff</p>
 <h4>Techincal Difficulty</h4><p>@loc.TDiff</p>
 <h4>Description</h4><p>@loc.Description</p>
+
+@using (Html.BeginForm("AddComment", "Location", FormMethod.Get,
+                            new { id = "createForm" }))
+{
+    ViewBag.locId = loc.Id;
+    <h3>Search Keyword:</h3>
+    <input type="text" size="20" name="text" />
+    <br />
+    <input type="submit" value="Post Comment" />
+}
+
+@{
+    var commentList = ViewBag.locationCommentResult;
+    if (commentList != null)
+    {
+        <h3>Comments:</h3>
+        if (commentList.Count > 0) //can remove?
+        {
+            for (int i = 0; i < commentList.Count; i++)
+            {
+                <p>@commentList[i].Text at @commentList[i].Timestamp</p>
+                <br />
+            }
+        }
+        else
+        {
+
+        }
+
+        <br />
+    }
+    <p>@ViewBag.locationCommentError</p>
+}

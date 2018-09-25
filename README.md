@@ -38,3 +38,5 @@ A web based platform to track trip reports on alpine trails.
 - Make all local variables camel case including viewbag ones
 - Remove unnecessary console writes 
 - Why doesnt search location show message when there are no results
+- Fix else of searchloc action result
+- Fix problem showing comments
