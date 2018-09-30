@@ -7,17 +7,19 @@ namespace MtnData.Models
 {
     public class User
     {
-        private string username;
-        private string name;
-        private string email;
-        private int type;
+        public int Id { get; private set; }
+        public string Username { get; private set; }
+        public string Name { get; private set; }
+        public string Email { get; private set; }
+        public int Type { get; private set; }
 
-        public User(string n, string un, string e, int t)
+        public User(int i, string n, string un, string e, int t)
         {
-            username = un;
-            name = n;
-            email = e;
-            type = t;
+            Id = i;
+            Username = un;
+            Name = n;
+            Email = e;
+            Type = t;
         }
     }
 }

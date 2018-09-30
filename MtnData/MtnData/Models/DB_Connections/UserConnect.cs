@@ -121,7 +121,7 @@ namespace MtnData.Models
         /// <returns>a message with a bool indicating success and a string mesage</returns>
         public LoginMessage Login(string username, string pass)
         {
-            string SqlString = @"SELECT Name, Username, Email, Type FROM User WHERE Username= @user AND Password= @pass";
+            string SqlString = @"SELECT Id, Name, Username, Email, Type FROM User WHERE Username= @user AND Password= @pass";
             SQLiteCommand login = new SQLiteCommand(SqlString, conn);
 
             login.Parameters.Add(new SQLiteParameter("@user", username));
@@ -138,9 +138,9 @@ namespace MtnData.Models
                 }
                 else //not checking for the case of more than one row returned as its logically impossible
                 {
-                    object[] oarr = new object[4];
+                    object[] oarr = new object[5];
                     res.GetValues(oarr);
-                    toReturn = new User(oarr[0].ToString(), oarr[1].ToString(), oarr[2].ToString(), Int32.Parse(oarr[3].ToString()));
+                    toReturn = new User(Int32.Parse(oarr[0].ToString()), oarr[1].ToString(), oarr[2].ToString(), oarr[3].ToString(), Int32.Parse(oarr[4].ToString()));
                 }
                 res.Close();
                 conn.Close();

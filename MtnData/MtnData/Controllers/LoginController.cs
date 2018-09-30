@@ -24,6 +24,7 @@ namespace MtnData.Controllers
 
             if (message.GetResult())
             {
+                Globals.PRESENT_USER = message.GetUser();
                 return View("~/Views/Home/Index.cshtml");
             }
             else
