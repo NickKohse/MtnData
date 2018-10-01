@@ -18,7 +18,7 @@ namespace MtnData.Models.DB_Connections
         /// <param name="userID">The id of the user making the comment</param>
         /// <param name="locID">The id of the location the comment is being made about</param>
         /// <returns>A message which realys whether or not the operation was sucessful</returns>
-        public Message AddComment(string text, int userID, long locID)
+        public Message AddComment(string text, long userID, long locID)
         {
             //check referential integrity
             string sqlString = @"INSERT INTO Comment (DestId, UserId, Time, Text) VALUES(@locID, @userID, @time, @text)";

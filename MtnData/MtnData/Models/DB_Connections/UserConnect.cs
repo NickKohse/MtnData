@@ -31,7 +31,7 @@ namespace MtnData.Models
             {
                 return new Message(false, "Username is being used by another user");
             }
-            if (!Utilities.GoodPassword(password))
+            if (!GoodPassword(password))
             {
                 return new Message(false, "Password too weak");
             }
@@ -44,26 +44,6 @@ namespace MtnData.Models
             addUserSQL.Parameters.Add(new SQLiteParameter("@type", Globals.USER_TYPES.Regular)); //any user made in this fashion must be a regular user
 
             return ExecuteUpdate(addUserSQL, "AddUser");
-
-            /*
-            try 
-            {
-                conn.Open();
-                int rows = addUserSQL.ExecuteNonQuery();
-                if(rows != 1)
-                {
-                    throw new Exception(rows + "rows were affected by inserting a user instead of the expected 1");
-                }
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                Utilities.ExceptionLogger("An exception has occured in the AddUser function. Exception message:" + ex.Message);
-                return new Message(false, "An unexpected exception has occured");
-
-            }
-            return new Message(true, "Sucessfully added user");
-            */
         }
 
         /// <summary>
@@ -80,7 +60,7 @@ namespace MtnData.Models
             {
                 return new Message(false, "This is not a changeable attribute.");
             }
-            if (attr == "Password" && !Utilities.GoodPassword(newAttr))
+            if (attr == "Password" && !GoodPassword(newAttr))
             {
                 return new Message(false, "Password too weak");
             }
@@ -227,6 +207,20 @@ namespace MtnData.Models
                 return false;
             }
             conn.Close();
+            return true;
+        }
+
+        /// <summary>
+        /// Checks if a password is strong enough
+        /// </summary>
+        /// <param name="pass">The passsword in question</param>
+        /// <returns>True for a good password, false if it's too weak</returns>
+        private Boolean GoodPassword(String pass)
+        {
+            if (pass.Length < 8 || !pass.Any(char.IsUpper) || !pass.Any(char.IsLower) || !pass.Any(char.IsDigit))
+            {
+                return false;
+            }
             return true;
         }
     }

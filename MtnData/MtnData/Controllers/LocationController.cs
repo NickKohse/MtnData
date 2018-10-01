@@ -124,7 +124,7 @@ namespace MtnData.Controllers
         public ActionResult AddComment(string text)
         {
             CommentConnect cc = new CommentConnect();
-            cc.AddComment(text, 5 /*somehow get userid from storage*/, Globals.PRESENT_LOC.Id);
+            cc.AddComment(text, Globals.PRESENT_LOC.Id, Globals.PRESENT_LOC.Id);
             ViewBag.searchLocationResult = Globals.PRESENT_LOC;
             return View("ShowLocation");
         }

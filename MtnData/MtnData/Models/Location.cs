@@ -16,11 +16,11 @@ namespace MtnData.Models
         public Coordinate End { get; private set; }
         public long PDiff { get; private set; }
         public long TDiff { get; private set; }
-        public long FinalEv { get; private set; }
+        public long PeakEv { get; private set; }
         public long Verified { get; private set; }
         public string Description { get; private set; }
 
-        public Location(long id, string name, string region, long evGain, double distance, Coordinate start, Coordinate end, long pDiff, long tDiff, long finalEv, long verified, string description)
+        public Location(long id, string name, string region, long evGain, double distance, Coordinate start, Coordinate end, long pDiff, long tDiff, long peakEv, long verified, string description)
         {
             if (pDiff < 1 || pDiff > 5)
             {
@@ -40,7 +40,7 @@ namespace MtnData.Models
             End = end;
             TDiff = tDiff;
             PDiff = pDiff;
-            FinalEv = finalEv;
+            PeakEv = peakEv;
             Verified = verified;
             Description = description;
         }

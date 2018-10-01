@@ -8,21 +8,6 @@ namespace MtnData.Models
     public static class Utilities
     {
         /// <summary>
-        /// Checks if a password is strong enough
-        /// </summary>
-        /// <param name="pass">The passsword in question</param>
-        /// <returns>True for a good password, false if it's too weak</returns>
-        public static Boolean GoodPassword(String pass)
-        {
-            if(pass.Length < 8 || !pass.Any(char.IsUpper) || !pass.Any(char.IsLower) || !pass.Any(char.IsDigit))
-            {
-                return false;
-            }
-            
-            return true;
-        }
-
-        /// <summary>
         /// Returns current unix time in seconds
         /// </summary>
         /// <returns></returns>

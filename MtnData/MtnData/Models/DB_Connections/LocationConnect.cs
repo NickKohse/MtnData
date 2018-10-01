@@ -30,7 +30,7 @@ namespace MtnData.Models.DB_Connections
             addLocSQL.Parameters.Add(new SQLiteParameter("@endcoords", toAdd.End));
             addLocSQL.Parameters.Add(new SQLiteParameter("@pdiff", toAdd.PDiff));
             addLocSQL.Parameters.Add(new SQLiteParameter("@tdiff", toAdd.TDiff));
-            addLocSQL.Parameters.Add(new SQLiteParameter("@peakev", toAdd.FinalEv));
+            addLocSQL.Parameters.Add(new SQLiteParameter("@peakev", toAdd.PeakEv));
             addLocSQL.Parameters.Add(new SQLiteParameter("@verified", toAdd.Verified));
             addLocSQL.Parameters.Add(new SQLiteParameter("@description", toAdd.Description));
             return ExecuteUpdate(addLocSQL, "AddLocation");
@@ -56,7 +56,7 @@ namespace MtnData.Models.DB_Connections
             updateLocSQL.Parameters.Add(new SQLiteParameter("@endcoords", toUpdate.End));
             updateLocSQL.Parameters.Add(new SQLiteParameter("@pdiff", toUpdate.PDiff));
             updateLocSQL.Parameters.Add(new SQLiteParameter("@tdiff", toUpdate.TDiff));
-            updateLocSQL.Parameters.Add(new SQLiteParameter("@peakev", toUpdate.FinalEv));
+            updateLocSQL.Parameters.Add(new SQLiteParameter("@peakev", toUpdate.PeakEv));
             updateLocSQL.Parameters.Add(new SQLiteParameter("@verified", toUpdate.Verified));
             updateLocSQL.Parameters.Add(new SQLiteParameter("@description", toUpdate.Description));
             updateLocSQL.Parameters.Add(new SQLiteParameter("@id", id));
