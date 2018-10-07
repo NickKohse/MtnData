@@ -127,7 +127,6 @@ namespace MtnData.Models
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
                 Utilities.ExceptionLogger("An exception has occurred in the Login function. Exception message:" + ex.Message);
                 return new LoginMessage(false, "An unexpected exception has occurred", null);
             }
@@ -222,6 +221,19 @@ namespace MtnData.Models
                 return false;
             }
             return true;
+        }
+
+        public bool Exists(long id)
+        {
+            string sqlString = @"SELECT Id FROM USER WHERE Id=@id";
+            SQLiteCommand check = new SQLiteCommand(sqlString, conn);
+            check.Parameters.Add(new SQLiteParameter("@id", id));
+
+            conn.Open();
+            SQLiteDataReader res = check.ExecuteReader();
+            bool tmp = res.HasRows;
+            conn.Close();
+            return tmp;
         }
     }
 }

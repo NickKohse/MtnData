@@ -10,7 +10,7 @@ namespace MtnData.Models.DB_Connections
 {
     public class LocationConnect : DBConnect
     {
-        public LocationConnect() : base() {}
+        public LocationConnect() : base() { }
 
         /// <summary>
         /// Add a new location to the database. This funcation doesn't check to see if any values are unique because no values in this tbale have to be 
@@ -116,7 +116,6 @@ namespace MtnData.Models.DB_Connections
                         res.GetValues(oarr);
                         found.Add(new Location((long)oarr[0], (string)oarr[1], (string)oarr[2], (long)oarr[3], (double)oarr[4], new Coordinate((string)oarr[5]), new Coordinate((string)oarr[6]),
                             (long)oarr[7], (long)oarr[8], (long)oarr[9], (long)oarr[10], (string)oarr[11]));//this isn't ideal
-                        System.Diagnostics.Debug.WriteLine(found.Count + "-----");
                     }
                     catch (Exception ex)
                     {
@@ -133,6 +132,19 @@ namespace MtnData.Models.DB_Connections
                 conn.Close();
                 return new Message(false, "Couldn't find a location containing the following string: " + keyword);
             }
+        }
+
+        public bool Exists(long id)
+        {
+            string sqlString = @"SELECT Id FROM DESTINATION WHERE Id=@id";
+            SQLiteCommand check = new SQLiteCommand(sqlString, conn);
+            check.Parameters.Add(new SQLiteParameter("@id", id));
+
+            conn.Open();
+            SQLiteDataReader res = check.ExecuteReader();
+            bool tmp = res.HasRows;
+            conn.Close();
+            return tmp;
         }
     }
 }

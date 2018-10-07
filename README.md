@@ -7,14 +7,10 @@ A web based platform to track trip reports on alpine trails.
 ```
 ## TODO
 ### For 1.0 Alpha
-- Change login to the username of the logged in user in the navbar on login
-- fix casting issue in location search ***
-- Add a way for the location page to render the comments
-- Check in add comment function to make sure referential integrity is intact before adding
-- Remove unnecessary console writes 
 - Why doesnt search location show message when there are no results
 - Fix else of searchloc action result
-- Fix problem showing comments
+- Add trip report page / controller / db connector
+- Fix outstanding issues
 ### For Later
 - find a way to un-greyout verified checkbox if an admin is logged in
 - deal with possible nulls for inserting location
@@ -34,6 +30,13 @@ A web based platform to track trip reports on alpine trails.
 - Put user in regular message payload, or make specialized message for each type
 - Put functions in alphabetical order
 - Delete extra spaces
+- Find a better way to map db to objects
+- Write unit tests
+- Write end to end tests
+- Finish the user page(show recent activity, allow password chasnge etc)
+- Make sure username aren't the same if non csae sensitive
+- Add Log rotation
+- Switch to use async functions for db access
 
 
 

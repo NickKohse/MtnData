@@ -9,7 +9,7 @@ namespace MtnData.Models.DB_Connections
 {
     public class CommentConnect : DBConnect
     {
-        public CommentConnect() : base() {}
+        public CommentConnect() : base() { }
 
         /// <summary>
         /// Function to add a comment to the comment table
@@ -20,7 +20,11 @@ namespace MtnData.Models.DB_Connections
         /// <returns>A message which realys whether or not the operation was sucessful</returns>
         public Message AddComment(string text, long userID, long locID)
         {
-            //check referential integrity
+            if(!new LocationConnect().Exists(locID) && !new UserConnect().Exists(userID))
+            {
+                Utilities.EventLogger("Referential Integrity voilated in AddComment function", Globals.LOG_LEVELS.Critical);
+                return new Message(false, "Couldn't add comment with, referential integrity violated");
+            }
             string sqlString = @"INSERT INTO Comment (DestId, UserId, Time, Text) VALUES(@locID, @userID, @time, @text)";
             SQLiteCommand addCommentSQL = new SQLiteCommand(sqlString, conn);
             addCommentSQL.Parameters.Add(new SQLiteParameter("@locID", locID));
@@ -32,7 +36,7 @@ namespace MtnData.Models.DB_Connections
         
         public Message GetLocationComments(string locID)
         {
-            string sqlString = @"SELECT * FROM COMMENT WHERE Id=@id";
+            string sqlString = @"SELECT * FROM COMMENT WHERE DestId=@id";
             SQLiteCommand getCommentsSQL = new SQLiteCommand(sqlString, conn);
             getCommentsSQL.Parameters.Add(new SQLiteParameter("@id", locID));
 
