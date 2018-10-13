@@ -76,10 +76,9 @@ namespace MtnData.Controllers
                 ViewBag.locList = (List<Location>)response.GetPayload();
                 return View("Index");
             }
-            else //doesn't make any sense, dont return payload if it's going to be null
+            else 
             {
-                //return something that shows there are no responses
-                ViewBag.locList = (List<Location>)response.GetPayload();
+                ViewBag.locList = new List<Location>(); //bit of hack, returning null and a list with no items have differnt meanings to the logic in the cshtml
                 return View("Index");
             }
         }

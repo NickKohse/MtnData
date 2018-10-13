@@ -7,10 +7,9 @@ A web based platform to track trip reports on alpine trails.
 ```
 ## TODO
 ### For 1.0 Alpha
-- Why doesnt search location show message when there are no results
-- Fix else of searchloc action result
+- Restructure TR DB
 - Add trip report page / controller / db connector
-- Fix outstanding issues
+
 ### For Later
 - find a way to un-greyout verified checkbox if an admin is logged in
 - deal with possible nulls for inserting location
@@ -37,6 +36,7 @@ A web based platform to track trip reports on alpine trails.
 - Make sure username aren't the same if non csae sensitive
 - Add Log rotation
 - Switch to use async functions for db access
+- Fix outstanding issues
 
 
 

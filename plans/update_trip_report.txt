@@ -1,0 +1,13 @@
+Trip report according to the original plans was just going to be a comment but with the additional results field, which would indicate if the trip was a success or not.
+I have decided to change this implementation. Trip report will now be seperate from comment, it will refer in the db to the user who wrote it, and the location it's for.
+Also having the reports structured like this will make it easier to create statistics about a locations trips.
+It will have the following columns:
+-UserId
+-DestId
+-Date (of the trip)
+-Time (of posting the report)
+-Result (was the trip a success)
+-Description (text description of the trip)
+
+-For the future:
+-A way to add pictures to the trip report
