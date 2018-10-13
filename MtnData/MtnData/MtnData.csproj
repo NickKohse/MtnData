@@ -148,6 +148,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\TripReportController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -155,6 +156,7 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\DB_Connections\CommentConnect.cs" />
     <Compile Include="Models\DB_Connections\LocationConnect.cs" />
+    <Compile Include="Models\DB_Connections\TripReportConnect.cs" />
     <Compile Include="Models\Exceptions.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Messages\Message.cs" />
@@ -215,6 +217,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\TripReport\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

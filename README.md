@@ -7,7 +7,6 @@ A web based platform to track trip reports on alpine trails.
 ```
 ## TODO
 ### For 1.0 Alpha
-- Restructure TR DB
 - Add trip report page / controller / db connector
 
 ### For Later
