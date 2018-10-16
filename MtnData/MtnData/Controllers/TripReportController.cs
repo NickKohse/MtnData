@@ -16,6 +16,11 @@ namespace MtnData.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Show the page for a specific trip report
+        /// </summary>
+        /// <param name="id">The id of the trip report</param>
+        /// <returns></returns>
         public ActionResult ShowTripReport(int id)
         {
             TripReportConnect tc = new TripReportConnect();

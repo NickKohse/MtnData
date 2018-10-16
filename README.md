@@ -35,7 +35,8 @@ A web based platform to track trip reports on alpine trails.
 - Make sure username aren't the same if non csae sensitive
 - Add Log rotation
 - Switch to use async functions for db access
-- Fix outstanding issues
+- Fix outstanding issues- Get rid of repetitive adding parameters in sql functions
+- Get rid of repetitive stuff in 'select' sql functions
 
 
 
